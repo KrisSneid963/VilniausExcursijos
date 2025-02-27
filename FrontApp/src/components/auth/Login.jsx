@@ -10,11 +10,11 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await fetch("http://localhost:8080/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
+                method: "GET",
+                headers: { "Content-Type": "application/json", 'Authorization': `Basic ${btoa(email + ":" + password)}` },
+                // body: JSON.stringify({ email, password })
             });
-
+            
             if (!response.ok) throw new Error("Probably unauthorized/see console");
 
             const data = await response.json();
